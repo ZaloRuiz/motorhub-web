@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="MotorHub: el ecosistema vehicular de Santa Cruz. Servicios mecánicos, emergencias viales, gestión de tu vehículo y mucho más."
+  />
+
+  <title>MotorHub | Tu ecosistema vehicular</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ["Inter", "sans-serif"],
+            montserrat: ["Montserrat", "sans-serif"],
+          },
+          boxShadow: {
+            glowBlue: "0 0 45px rgba(0, 122, 255, 0.16)",
+            glowRed: "0 0 45px rgba(255, 59, 48, 0.18)",
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #0d1117;
+    }
+
+    .hero-grid {
+      background-image:
+        linear-gradient(rgba(0, 122, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 122, 255, 0.035) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    .glass {
+      background: rgba(22, 27, 34, 0.72);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .phone-shadow {
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.5),
+        0 0 50px rgba(0, 122, 255, 0.12);
+    }
+
+    .phone-screen {
+      background:
+        radial-gradient(circle at 80% 10%, rgba(0, 122, 255, 0.18), transparent 30%),
+        #0d1117;
+    }
+
+    .map-bg {
+      background:
+        linear-gradient(
+          135deg,
+          rgba(0, 122, 255, 0.08),
+          rgba(13, 17, 23, 0.95)
+        ),
+        repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 18px,
+          rgba(255, 255, 255, 0.025) 19px,
+          rgba(255, 255, 255, 0.025) 20px
+        );
+    }
+
+    .pulse-ring {
+      animation: pulse-ring 2.2s infinite;
+    }
+
+    @keyframes pulse-ring {
+      0% {
+        box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.45);
+      }
+      70% {
+        box-shadow: 0 0 0 18px rgba(255, 59, 48, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(255, 59, 48, 0);
+      }
+    }
+
+    .float-slow {
+      animation: float-slow 5s ease-in-out infinite;
+    }
+
+    @keyframes float-slow {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .gradient-text {
+      background: linear-gradient(100deg, #ffffff 20%, #66b5ff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+  </style>
+</head>
+
+<body class="font-sans text-white antialiased">
+
+  <!-- =========================================================
+       HEADER
+  ========================================================== -->
+  <header class="sticky top-0 z-50 border-b border-white/5 bg-[#0D1117]/90 backdrop-blur-xl">
+    <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8 lg:h-20">
+
+      <!-- Logo -->
+      <a href="#inicio" class="flex items-center gap-2.5">
+        <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-[#007AFF] shadow-glowBlue">
+          <!-- ICON: logo / volante -->
+          <svg
+            class="h-5 w-5 text-white"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="12" r="8.5"></circle>
+            <path d="M5 10.5h14"></path>
+            <path d="M12 10.5v9"></path>
+            <circle cx="12" cy="10.5" r="2"></circle>
+          </svg>
+        </div>
+
+        <span class="font-montserrat text-lg font-extrabold tracking-tight">
+          Motor<span class="text-[#007AFF]">Hub</span>
+        </span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden items-center gap-8 lg:flex">
+        <a href="#inicio" class="text-sm text-[#8B949E] transition hover:text-white">Inicio</a>
+        <a href="#funciones" class="text-sm text-[#8B949E] transition hover:text-white">Funciones</a>
+        <a href="#emergencia" class="text-sm text-[#8B949E] transition hover:text-white">Emergencia</a>
+        <a href="#aliados" class="text-sm text-[#8B949E] transition hover:text-white">Aliados</a>
+      </nav>
+
+      <!-- CTA -->
+      <a
+        href="#b2b"
+        class="hidden rounded-xl bg-[#FF3B30] px-5 py-2.5 text-sm font-semibold shadow-glowRed transition hover:-translate-y-0.5 hover:bg-[#ff5148] sm:inline-flex"
+      >
+        Registrar mi Taller
+      </a>
+
+      <!-- Mobile Menu Button -->
+      <button
+        type="button"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-[#161B22] text-white lg:hidden"
+        aria-label="Abrir menú"
+      >
+        <!-- ICON: menú -->
+        <svg
+          class="h-5 w-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M4 6h16"></path>
+          <path d="M4 12h16"></path>
+          <path d="M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+
+  <main>
+
+    <!-- =========================================================
+         HERO
+    ========================================================== -->
+    <section id="inicio" class="hero-grid relative overflow-hidden">
+      <!-- Background glow -->
+      <div class="pointer-events-none absolute -right-32 top-20 h-80 w-80 rounded-full bg-[#007AFF]/10 blur-3xl"></div>
+      <div class="pointer-events-none absolute -left-40 top-72 h-96 w-96 rounded-full bg-[#00C7BE]/5 blur-3xl"></div>
+
+      <div class="relative mx-auto grid max-w-7xl items-center gap-14 px-5 pb-20 pt-14 sm:px-8 md:pt-20 lg:grid-cols-2 lg:gap-16 lg:pb-28 lg:pt-24">
+
+        <!-- Hero copy -->
+        <div class="max-w-2xl">
+          <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-[#007AFF]/20 bg-[#007AFF]/5 px-3.5 py-2 text-xs font-semibold text-[#66B5FF]">
+            <span class="h-1.5 w-1.5 rounded-full bg-[#00C7BE]"></span>
+            Hecho para conductores de Santa Cruz
+          </div>
+
+          <h1 class="font-montserrat text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl">
+            Todo el ecosistema
+            <span class="gradient-text">vehicular</span>
+            de Santa Cruz en tu bolsillo.
+          </h1>
+
+          <p class="mt-6 max-w-xl text-base leading-7 text-[#8B949E] sm:text-lg">
+            Encuentra talleres, emergencias viales, combustible y servicios
+            cercanos. Administra tu vehículo y ten la información que necesitas
+            cuando realmente la necesitas.
+          </p>
+
+          <!-- Store buttons -->
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+
+            <!-- App Store -->
+            <a
+              href="#"
+              class="group flex min-h-14 items-center justify-center gap-3 rounded-2xl border border-white/10 bg-white px-5 py-3 text-left text-[#0D1117] shadow-xl transition hover:-translate-y-1 hover:bg-gray-100"
+            >
+              <!-- ICON: Apple -->
+              <svg class="h-7 w-7" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.05 20.28c-.98.95-2.05.8-3.09.35-1.1-.46-2.11-.48-3.27 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.81 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.32 2.99-2.53 4.07zM12.03 7.25C11.88 5.02 13.69 3.18 15.78 3c.29 2.58-2.33 4.5-3.75 4.25z"/>
+              </svg>
+
+              <span>
+                <span class="block text-[10px] font-medium leading-none">Disponible en</span>
+                <span class="mt-1 block font-montserrat text-base font-bold leading-none">App Store</span>
+              </span>
+            </a>
+
+            <!-- Google Play -->
+            <a
+              href="#"
+              class="group flex min-h-14 items-center justify-center gap-3 rounded-2xl border border-white/10 bg-[#161B22] px-5 py-3 text-left text-white transition hover:-translate-y-1 hover:border-white/20 hover:bg-[#1c222b]"
+            >
+              <!-- ICON: Google Play -->
+              <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none">
+                <path d="M3.5 3.5L14.2 12 3.5 20.5V3.5Z" fill="#00C7BE"/>
+                <path d="M3.5 3.5L17.8 10.7L14.2 12L3.5 3.5Z" fill="#4CC9F0"/>
+                <path d="M3.5 20.5L17.8 13.3L14.2 12L3.5 20.5Z" fill="#00AEEF"/>
+                <path d="M17.8 10.7L20.5 12L17.8 13.3L14.2 12L17.8 10.7Z" fill="#FF3B30"/>
+              </svg>
+
+              <span>
+                <span class="block text-[10px] font-medium leading-none text-[#8B949E]">Disponible en</span>
+                <span class="mt-1 block font-montserrat text-base font-bold leading-none">Google Play</span>
+              </span>
+            </a>
+          </div>
+
+          <div class="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3 text-xs text-[#8B949E]">
+            <span class="flex items-center gap-2">
+              <span class="text-[#00C7BE]">✓</span>
+              Servicios cercanos
+            </span>
+            <span class="flex items-center gap-2">
+              <span class="text-[#00C7BE]">✓</span>
+              Emergencias
+            </span>
+            <span class="flex items-center gap-2">
+              <span class="text-[#00C7BE]">✓</span>
+              Modo Offline
+            </span>
+          </div>
+        </div>
+
+
+        <!-- Phone mockups -->
+        <div class="relative mx-auto flex h-[560px] w-full max-w-xl items-center justify-center lg:h-[650px]">
+
+          <!-- Ambient glow -->
+          <div class="absolute h-64 w-64 rounded-full bg-[#007AFF]/10 blur-3xl"></div>
+
+          <!-- Back phone -->
+          <div class="phone-shadow absolute right-[3%] top-[8%] hidden w-[210px] rotate-[8deg] overflow-hidden rounded-[35px] border-8 border-[#252B34] bg-[#161B22] sm:block">
+            <div class="h-[440px] phone-screen p-3">
+              <div class="mx-auto mb-5 h-1.5 w-20 rounded-full bg-white/10"></div>
+
+              <div class="mb-3 flex items-center justify-between">
+                <span class="font-montserrat text-[9px] font-bold">Mi Garaje</span>
+                <div class="h-6 w-6 rounded-full bg-[#007AFF]/20"></div>
+              </div>
+
+              <div class="rounded-2xl border border-white/5 bg-[#161B22] p-3">
+                <div class="text-[8px] text-[#8B949E]">Toyota Corolla</div>
+                <div class="mt-1 font-montserrat text-xs font-bold">2021</div>
+                <div class="mt-4 h-1.5 overflow-hidden rounded-full bg-white/5">
+                  <div class="h-full w-3/4 rounded-full bg-[#007AFF]"></div>
+                </div>
+                <div class="mt-1 text-[7px] text-[#8B949E]">Próximo mantenimiento</div>
+              </div>
+
+              <div class="mt-3 grid grid-cols-2 gap-2">
+                <div class="h-20 rounded-2xl bg-[#161B22]"></div>
+                <div class="h-20 rounded-2xl bg-[#161B22]"></div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Main phone -->
+          <div class="phone-shadow float-slow relative z-10 w-[240px] overflow-hidden rounded-[40px] border-[9px] border-[#252B34] bg-[#161B22] sm:w-[265px]">
+            <div class="absolute left-1/2 top-0 z-20 h-6 w-28 -translate-x-1/2 rounded-b-2xl bg-[#252B34]"></div>
+
+            <div class="phone-screen min-h-[500px] p-4 sm:min-h-[550px]">
+
+              <div class="mb-7 mt-4 flex items-center justify-between">
+                <div>
+                  <div class="text-[8px] text-[#8B949E]">Hola, conductor</div>
+                  <div class="font-montserrat text-sm font-bold">¿Qué necesitas?</div>
+                </div>
+
+                <div class="flex h-8 w-8 items-center justify-center rounded-full bg-[#161B22]">
+                  <!-- ICON: campana -->
+                  <svg class="h-4 w-4 text-[#8B949E]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"></path>
+                    <path d="M10 21h4"></path>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Emergency -->
+              <div class="rounded-[22px] bg-gradient-to-br from-[#FF3B30] to-[#b81f18] p-4 shadow-glowRed">
+                <div class="flex items-start justify-between">
+                  <div>
+                    <div class="text-[8px] font-medium text-white/70">ASISTENCIA</div>
+                    <div class="mt-1 font-montserrat text-sm font-extrabold">¿Tienes una emergencia?</div>
+                  </div>
+
+                  <div class="pulse-ring flex h-9 w-9 items-center justify-center rounded-full bg-white/15">
+                    <!-- ICON: alerta -->
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 8v5"></path>
+                      <path d="M12 16h.01"></path>
+                      <path d="M10.3 3.7L2.7 17a2 2 0 0 0 1.74 3h15.12a2 2 0 0 0 1.74-3L13.7 3.7a2 2 0 0 0-3.4 0Z"></path>
+                    </svg>
+                  </div>
+                </div>
+
+                <div class="mt-4 rounded-xl bg-black/15 px-3 py-2 text-[8px] text-white/80">
+                  Envía tu ubicación y problema a un servicio cercano.
+                </div>
+              </div>
+
+              <div class="mt-4 grid grid-cols-2 gap-2">
+
+                <div class="rounded-2xl border border-white/5 bg-[#161B22] p-3">
+                  <div class="mb-3 flex h-8 w-8 items-center justify-center rounded-xl bg-[#007AFF]/10">
+                    <!-- ICON: mapa -->
+                    <svg class="h-4 w-4 text-[#007AFF]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="m9 18-6 3V6l6-3 6 3 6-3v15l-6 3-6-3Z"></path>
+                      <path d="M9 3v15"></path>
+                      <path d="M15 6v15"></path>
+                    </svg>
+                  </div>
+                  <div class="font-montserrat text-[9px] font-bold">Mapa</div>
+                  <div class="mt-1 text-[7px] text-[#8B949E]">Servicios cercanos</div>
+                </div>
+
+                <div class="rounded-2xl border border-white/5 bg-[#161B22] p-3">
+                  <div class="mb-3 flex h-8 w-8 items-center justify-center rounded-xl bg-[#00C7BE]/10">
+                    <!-- ICON: auto -->
+                    <svg class="h-4 w-4 text-[#00C7BE]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M5 17h14"></path>
+                      <path d="m6 17-1-5 2-5h10l2 5-1 5"></path>
+                      <circle cx="8" cy="17" r="1.5"></circle>
+                      <circle cx="16" cy="17" r="1.5"></circle>
+                    </svg>
+                  </div>
+                  <div class="font-montserrat text-[9px] font-bold">Mi Garaje</div>
+                  <div class="mt-1 text-[7px] text-[#8B949E]">Tu vehículo</div>
+                </div>
+              </div>
+
+              <div class="mt-4 rounded-2xl border border-white/5 bg-[#161B22] p-3">
+                <div class="flex items-center justify-between">
+                  <span class="font-montserrat text-[9px] font-bold">Servicios cerca de ti</span>
+                  <span class="text-[7px] text-[#007AFF]">Ver todos</span>
+                </div>
+
+                <div class="mt-3 space-y-2">
+                  <div class="flex items-center gap-2 rounded-xl bg-white/[0.025] p-2">
+                    <div class="h-7 w-7 rounded-lg bg-[#007AFF]/10"></div>
+                    <div class="flex-1">
+                      <div class="text-[8px] font-semibold">Taller Mecánico</div>
+                      <div class="text-[7px] text-[#8B949E]">0.8 km · Abierto</div>
+                    </div>
+                    <span class="text-[7px] text-[#00C7BE]">●</span>
+                  </div>
+
+                  <div class="flex items-center gap-2 rounded-xl bg-white/[0.025] p-2">
+                    <div class="h-7 w-7 rounded-lg bg-[#FF3B30]/10"></div>
+                    <div class="flex-1">
+                      <div class="text-[8px] font-semibold">Grúa</div>
+                      <div class="text-[7px] text-[#8B949E]">1.4 km · Disponible</div>
+                    </div>
+                    <span class="text-[7px] text-[#00C7BE]">●</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Front small floating card -->
+          <div class="absolute bottom-[8%] left-[1%] z-20 hidden w-44 rounded-2xl border border-white/10 bg-[#161B22]/95 p-3 shadow-2xl backdrop-blur-xl sm:block">
+            <div class="flex items-center gap-3">
+              <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-[#00C7BE]/10">
+                <!-- ICON: GPS -->
+                <svg class="h-4 w-4 text-[#00C7BE]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="8"></circle>
+                  <circle cx="12" cy="12" r="2"></circle>
+                  <path d="M12 4V2"></path>
+                  <path d="M12 22v-2"></path>
+                </svg>
+              </div>
+
+              <div>
+                <div class="font-montserrat text-[9px] font-bold">Taller cercano</div>
+                <div class="mt-1 text-[8px] text-[#8B949E]">A 650 metros</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         PARTNERS / CATEGORIES
+    ========================================================== -->
+    <section id="aliados" class="border-y border-white/5 bg-[#0A0E13]">
+      <div class="mx-auto max-w-7xl px-5 py-7 sm:px-8">
+        <div class="mb-5 text-center text-[10px] font-semibold uppercase tracking-[0.25em] text-[#8B949E]">
+          Un ecosistema conectado
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-x-7 gap-y-4 text-xs font-medium text-white/45 sm:gap-x-10">
+          <span>⚙ Talleres Diésel</span>
+          <span>◉ Gomeras</span>
+          <span>◈ Grúas</span>
+          <span>⛽ Surtidores</span>
+          <span>◆ Chaperos</span>
+          <span>⚡ Electricistas</span>
+          <span>🔧 Lubricentros</span>
+          <span>▣ Repuestos</span>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         EMERGENCY
+    ========================================================== -->
+    <section id="emergencia" class="relative overflow-hidden py-20 sm:py-28">
+      <div class="pointer-events-none absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#FF3B30]/5 blur-3xl"></div>
+
+      <div class="relative mx-auto max-w-7xl px-5 sm:px-8">
+
+        <div class="overflow-hidden rounded-[30px] border border-[#FF3B30]/30 bg-gradient-to-br from-[#241514] to-[#161B22] shadow-glowRed">
+          <div class="grid lg:grid-cols-2">
+
+            <!-- Copy -->
+            <div class="p-7 sm:p-10 lg:p-14">
+              <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-[#FF3B30]/30 bg-[#FF3B30]/10 px-3 py-2 text-xs font-semibold text-[#ff7169]">
+                <span class="h-1.5 w-1.5 rounded-full bg-[#FF3B30]"></span>
+                Asistencia cuando más importa
+              </div>
+
+              <h2 class="font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
+                Un botón.
+                <br />
+                <span class="text-[#FF3B30]">Una solución.</span>
+              </h2>
+
+              <p class="mt-5 max-w-xl text-sm leading-7 text-[#8B949E] sm:text-base">
+                Cuando ocurre una emergencia, MotorHub simplifica el proceso:
+                selecciona tu vehículo, indica qué sucede y encuentra servicios
+                disponibles cerca de tu ubicación.
+              </p>
+
+              <div class="mt-8 space-y-4">
+
+                <div class="flex gap-4">
+                  <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#FF3B30]/10 text-sm font-bold text-[#FF3B30]">
+                    01
+                  </div>
+                  <div>
+                    <h3 class="font-montserrat text-sm font-bold">Presiona Emergencia</h3>
+                    <p class="mt-1 text-xs leading-5 text-[#8B949E]">
+                      Accede rápidamente a la asistencia vial.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4">
+                  <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#FF3B30]/10 text-sm font-bold text-[#FF3B30]">
+                    02
+                  </div>
+                  <div>
+                    <h3 class="font-montserrat text-sm font-bold">Indica qué sucede</h3>
+                    <p class="mt-1 text-xs leading-5 text-[#8B949E]">
+                      Elige vehículo y describe el problema.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="flex gap-4">
+                  <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#FF3B30]/10 text-sm font-bold text-[#FF3B30]">
+                    03
+                  </div>
+                  <div>
+                    <h3 class="font-montserrat text-sm font-bold">Contacta al servicio</h3>
+                    <p class="mt-1 text-xs leading-5 text-[#8B949E]">
+                      Abre WhatsApp con tu información y ubicación listas para enviar.
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+            <!-- Emergency visual -->
+            <div class="relative flex min-h-[390px] items-center justify-center overflow-hidden bg-[#0D1117] p-8">
+
+              <div class="absolute inset-0 opacity-30"
+                style="
+                  background-image:
+                    linear-gradient(rgba(255,59,48,.08) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,59,48,.08) 1px, transparent 1px);
+                  background-size: 35px 35px;
+                ">
+              </div>
+
+              <div class="relative z-10 flex flex-col items-center">
+
+                <!-- Emergency button -->
+                <div class="pulse-ring flex h-36 w-36 items-center justify-center rounded-full bg-[#FF3B30] shadow-[0_0_70px_rgba(255,59,48,.25)]">
+                  <div class="flex h-28 w-28 flex-col items-center justify-center rounded-full border border-white/20 bg-[#d92c23]">
+                    <!-- ICON: alerta -->
+                    <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 8v5"></path>
+                      <path d="M12 16h.01"></path>
+                      <path d="M10.3 3.7L2.7 17a2 2 0 0 0 1.74 3h15.12a2 2 0 0 0 1.74-3L13.7 3.7a2 2 0 0 0-3.4 0Z"></path>
+                    </svg>
+
+                    <span class="mt-1 font-montserrat text-[10px] font-extrabold uppercase">
+                      Emergencia
+                    </span>
+                  </div>
+                </div>
+
+                <!-- WhatsApp floating card -->
+                <div class="mt-8 flex items-center gap-3 rounded-2xl border border-white/10 bg-[#161B22] px-4 py-3 shadow-2xl">
+                  <div class="flex h-9 w-9 items-center justify-center rounded-full bg-[#25D366]/10 text-[#25D366]">
+                    <!-- ICON: WhatsApp -->
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .4 5.2.4 11.7c0 2.1.6 4.1 1.6 5.8L.3 24l6.7-1.7c1.7.9 3.4 1.3 5.2 1.3h.1c6.5 0 11.7-5.2 11.7-11.7 0-3.1-1.3-6.1-3.5-8.4ZM12.2 21.5c-1.6 0-3.2-.4-4.6-1.2l-.3-.2-4 1 1.1-3.9-.3-.4a9.7 9.7 0 0 1-1.5-5.2c0-5.3 4.3-9.6 9.7-9.6 2.6 0 5 1 6.8 2.8a9.5 9.5 0 0 1 2.8 6.8c0 5.5-4.4 9.9-9.7 9.9Z"/>
+                    </svg>
+                  </div>
+
+                  <div>
+                    <div class="font-montserrat text-[10px] font-bold">WhatsApp listo</div>
+                    <div class="text-[8px] text-[#8B949E]">Ubicación + problema + vehículo</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         FEATURES / BENTO
+    ========================================================== -->
+    <section id="funciones" class="bg-[#0A0E13] py-20 sm:py-28">
+      <div class="mx-auto max-w-7xl px-5 sm:px-8">
+
+        <div class="max-w-2xl">
+          <div class="text-xs font-bold uppercase tracking-[0.2em] text-[#007AFF]">
+            Todo en un solo lugar
+          </div>
+
+          <h2 class="mt-3 font-montserrat text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
+            Tu vehículo.
+            <br />
+            <span class="text-[#8B949E]">Bajo control.</span>
+          </h2>
+
+          <p class="mt-5 text-sm leading-7 text-[#8B949E] sm:text-base">
+            Herramientas diseñadas para ayudarte antes, durante y después
+            de cada viaje.
+          </p>
+        </div>
+
+
+        <!-- Bento Grid -->
+        <div class="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+
+          <!-- GARAGE -->
+          <article class="group overflow-hidden rounded-[28px] border border-white/5 bg-[#161B22] p-6 transition hover:border-[#007AFF]/30 hover:shadow-glowBlue md:col-span-2 lg:col-span-2">
+            <div class="grid items-center gap-8 lg:grid-cols-2">
+
+              <div>
+                <div class="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl bg-[#007AFF]/10">
+                  <!-- ICON: vehículo -->
+                  <svg class="h-5 w-5 text-[#007AFF]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m5 17-1-5 2-5h12l2 5-1 5"></path>
+                    <path d="M5 17h14"></path>
+                    <circle cx="8" cy="17" r="1.5"></circle>
+                    <circle cx="16" cy="17" r="1.5"></circle>
+                  </svg>
+                </div>
+
+                <h3 class="font-montserrat text-xl font-bold">
+                  Garaje Virtual
+                </h3>
+
+                <p class="mt-3 text-sm leading-6 text-[#8B949E]">
+                  Registra tus vehículos y mantén bajo control los servicios,
+                  cambios y mantenimientos importantes.
+                </p>
+              </div>
+
+              <!-- Progress UI -->
+              <div class="rounded-2xl border border-white/5 bg-[#0D1117] p-5">
+                <div class="flex items-center justify-between">
+                  <span class="font-montserrat text-xs font-bold">Toyota Corolla</span>
+                  <span class="text-[10px] text-[#8B949E]">2021</span>
+                </div>
+
+                <div class="mt-5 space-y-4">
+
+                  <div>
+                    <div class="mb-1.5 flex justify-between text-[9px]">
+                      <span class="text-[#8B949E]">Aceite motor</span>
+                      <span class="text-[#00C7BE]">82%</span>
+                    </div>
+                    <div class="h-1.5 rounded-full bg-white/5">
+                      <div class="h-full w-[82%] rounded-full bg-[#00C7BE]"></div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div class="mb-1.5 flex justify-between text-[9px]">
+                      <span class="text-[#8B949E]">Llantas</span>
+                      <span class="text-[#007AFF]">64%</span>
+                    </div>
+                    <div class="h-1.5 rounded-full bg-white/5">
+                      <div class="h-full w-[64%] rounded-full bg-[#007AFF]"></div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div class="mb-1.5 flex justify-between text-[9px]">
+                      <span class="text-[#8B949E]">Corona</span>
+                      <span class="text-[#FFB020]">35%</span>
+                    </div>
+                    <div class="h-1.5 rounded-full bg-white/5">
+                      <div class="h-full w-[35%] rounded-full bg-[#FFB020]"></div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </article>
+
+
+          <!-- MAP -->
+          <article class="overflow-hidden rounded-[28px] border border-white/5 bg-[#161B22] p-6 transition hover:border-[#007AFF]/30 hover:shadow-glowBlue">
+            <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#007AFF]/10">
+              <!-- ICON: mapa -->
+              <svg class="h-5 w-5 text-[#007AFF]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="m9 18-6 3V6l6-3 6 3 6-3v15l-6 3-6-3Z"></path>
+                <path d="M9 3v15"></path>
+                <path d="M15 6v15"></path>
+              </svg>
+            </div>
+
+            <h3 class="mt-5 font-montserrat text-xl font-bold">
+              Mapa Inteligente
+            </h3>
+
+            <p class="mt-3 text-sm leading-6 text-[#8B949E]">
+              Encuentra talleres y servicios cercanos usando tu ubicación.
+            </p>
+
+            <div class="map-bg relative mt-6 h-36 overflow-hidden rounded-2xl border border-white/5">
+
+              <!-- Fake map roads -->
+              <div class="absolute left-0 top-1/2 h-px w-full rotate-12 bg-white/10"></div>
+              <div class="absolute left-1/3 top-0 h-full w-px -rotate-12 bg-white/10"></div>
+              <div class="absolute right-1/4 top-0 h-full w-px rotate-[28deg] bg-white/5"></div>
+
+              <!-- Pins -->
+              <div class="absolute left-[25%] top-[30%] flex h-7 w-7 items-center justify-center rounded-full bg-[#007AFF] shadow-lg shadow-[#007AFF]/30">
+                <span class="h-2 w-2 rounded-full bg-white"></span>
+              </div>
+
+              <div class="absolute right-[22%] top-[55%] flex h-7 w-7 items-center justify-center rounded-full bg-[#FF3B30] shadow-lg shadow-[#FF3B30]/30">
+                <span class="h-2 w-2 rounded-full bg-white"></span>
+              </div>
+
+              <div class="absolute bottom-[15%] left-[48%] flex h-7 w-7 items-center justify-center rounded-full bg-[#00C7BE] shadow-lg shadow-[#00C7BE]/30">
+                <span class="h-2 w-2 rounded-full bg-white"></span>
+              </div>
+
+              <!-- Current location -->
+              <div class="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white bg-[#007AFF]">
+                <div class="absolute -inset-2 animate-ping rounded-full bg-[#007AFF]/30"></div>
+              </div>
+
+            </div>
+          </article>
+
+
+          <!-- DASHBOARD -->
+          <article class="overflow-hidden rounded-[28px] border border-white/5 bg-[#161B22] p-6 transition hover:border-[#FFB020]/30">
+            <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#FFB020]/10">
+              <!-- ICON: tablero -->
+              <svg class="h-5 w-5 text-[#FFB020]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 18a8 8 0 0 1 16 0"></path>
+                <path d="M12 10v5"></path>
+                <path d="M12 5v1"></path>
+                <path d="M5.6 8.6l.7.7"></path>
+                <path d="M18.4 8.6l-.7.7"></path>
+              </svg>
+            </div>
+
+            <h3 class="mt-5 font-montserrat text-xl font-bold">
+              Diccionario de Tablero
+            </h3>
+
+            <p class="mt-3 text-sm leading-6 text-[#8B949E]">
+              Entiende los avisos del tablero y descubre qué hacer ante cada señal.
+            </p>
+
+            <div class="mt-6 space-y-2">
+
+              <div class="flex items-center gap-3 rounded-xl border border-[#FF3B30]/10 bg-[#FF3B30]/5 p-3">
+                <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-[#FF3B30]/10">
+                  <!-- ICON: motor -->
+                  <svg class="h-4 w-4 text-[#FF3B30]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 9h3l2-3h6l2 3h3v8H4V9Z"></path>
+                    <path d="M7 17v2"></path>
+                    <path d="M17 17v2"></path>
+                  </svg>
+                </div>
+                <div>
+                  <div class="font-montserrat text-[10px] font-bold">Check Engine</div>
+                  <div class="text-[8px] text-[#FF3B30]">Alta importancia</div>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 rounded-xl border border-[#FFB020]/10 bg-[#FFB020]/5 p-3">
+                <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-[#FFB020]/10">
+                  <!-- ICON: llanta -->
+                  <svg class="h-4 w-4 text-[#FFB020]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="8"></circle>
+                    <path d="M12 8v4l2.5 2.5"></path>
+                  </svg>
+                </div>
+                <div>
+                  <div class="font-montserrat text-[10px] font-bold">Presión de llantas</div>
+                  <div class="text-[8px] text-[#FFB020]">Revisar pronto</div>
+                </div>
+              </div>
+
+            </div>
+          </article>
+
+
+          <!-- INSURANCE -->
+          <article class="overflow-hidden rounded-[28px] border border-white/5 bg-[#161B22] p-6 transition hover:border-[#00C7BE]/30 lg:col-span-2">
+            <div class="grid items-center gap-8 lg:grid-cols-2">
+
+              <div>
+                <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#00C7BE]/10">
+                  <!-- ICON: escudo -->
+                  <svg class="h-5 w-5 text-[#00C7BE]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 3 20 6v5c0 5-3.4 8.7-8 10-4.6-1.3-8-5-8-10V6l8-3Z"></path>
+                    <path d="m9 12 2 2 4-4"></path>
+                  </svg>
+                </div>
+
+                <h3 class="mt-5 font-montserrat text-xl font-bold">
+                  Seguro Vehicular
+                </h3>
+
+                <p class="mt-3 max-w-md text-sm leading-6 text-[#8B949E]">
+                  Ten los datos de tu póliza, aseguradora y agente disponibles
+                  cuando más los necesites.
+                </p>
+              </div>
+
+              <div class="rounded-2xl border border-white/5 bg-[#0D1117] p-5">
+
+                <div class="flex items-center justify-between">
+                  <div>
+                    <div class="text-[9px] text-[#8B949E]">Póliza activa</div>
+                    <div class="mt-1 font-montserrat text-xs font-bold">MotorHub Seguros</div>
+                  </div>
+
+                  <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-[#00C7BE]/10">
+                    <svg class="h-4 w-4 text-[#00C7BE]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 3 20 6v5c0 5-3.4 8.7-8 10-4.6-1.3-8-5-8-10V6l8-3Z"></path>
+                    </svg>
+                  </div>
+                </div>
+
+                <div class="mt-5 grid grid-cols-2 gap-3">
+                  <div class="rounded-xl bg-white/[0.025] p-3">
+                    <div class="text-[8px] text-[#8B949E]">Póliza</div>
+                    <div class="mt-1 text-[10px] font-semibold">MH-2026-0842</div>
+                  </div>
+
+                  <div class="rounded-xl bg-white/[0.025] p-3">
+                    <div class="text-[8px] text-[#8B949E]">Agente</div>
+                    <div class="mt-1 text-[10px] font-semibold">Disponible</div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         OFFLINE
+    ========================================================== -->
+    <section class="relative overflow-hidden py-20 sm:py-28">
+      <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#007AFF]/30 to-transparent"></div>
+
+      <div class="mx-auto max-w-7xl px-5 sm:px-8">
+        <div class="relative overflow-hidden rounded-[30px] border border-[#007AFF]/20 bg-[#161B22] px-6 py-12 text-center sm:px-10 sm:py-16">
+
+          <div class="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-[#007AFF]/10 blur-3xl"></div>
+
+          <div class="relative">
+            <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[#007AFF]/10">
+              <!-- ICON: señal offline -->
+              <svg class="h-7 w-7 text-[#007AFF]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 1l22 22"></path>
+                <path d="M8.5 8.5a5 5 0 0 0-1.6 1.1"></path>
+                <path d="M5 5a12 12 0 0 0-3 2"></path>
+                <path d="M12 18h.01"></path>
+                <path d="M15.5 15.5a5 5 0 0 0-2.1-1.2"></path>
+                <path d="M19 12a9 9 0 0 0-2.1-1.5"></path>
+              </svg>
+            </div>
+
+            <div class="mt-6 text-xs font-bold uppercase tracking-[0.25em] text-[#007AFF]">
+              Siempre disponible
+            </div>
+
+            <h2 class="mx-auto mt-4 max-w-4xl font-montserrat text-4xl font-extrabold leading-tight sm:text-5xl lg:text-6xl">
+              Funciona
+              <span class="text-[#007AFF]">SIN INTERNET.</span>
+            </h2>
+
+            <p class="mx-auto mt-5 max-w-2xl text-sm leading-7 text-[#8B949E] sm:text-base">
+              MotorHub mantiene información esencial almacenada localmente
+              para que puedas acceder a datos y realizar llamadas de línea
+              directa a servicios como grúas y talleres incluso cuando no
+              tengas conexión.
+            </p>
+
+            <div class="mt-8 flex flex-wrap justify-center gap-3">
+              <span class="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-xs text-[#8B949E]">
+                Base de datos local
+              </span>
+              <span class="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-xs text-[#8B949E]">
+                Contactos esenciales
+              </span>
+              <span class="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-xs text-[#8B949E]">
+                Asistencia vial
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         B2B
+    ========================================================== -->
+    <section id="b2b" class="bg-[#0A0E13] py-20 sm:py-28">
+      <div class="mx-auto max-w-7xl px-5 sm:px-8">
+
+        <div class="overflow-hidden rounded-[30px] border border-white/5 bg-gradient-to-br from-[#161B22] to-[#10151c]">
+
+          <div class="grid lg:grid-cols-[1.15fr_.85fr]">
+
+            <!-- B2B copy -->
+            <div class="p-7 sm:p-10 lg:p-14">
+
+              <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-[#007AFF]/20 bg-[#007AFF]/5 px-3.5 py-2 text-xs font-semibold text-[#66B5FF]">
+                MotorHub Admin
+              </div>
+
+              <h2 class="font-montserrat text-3xl font-extrabold leading-tight sm:text-4xl">
+                ¿Tienes un taller,
+                <br />
+                lubricentro o grúa?
+              </h2>
+
+              <p class="mt-5 max-w-xl text-sm leading-7 text-[#8B949E] sm:text-base">
+                Multiplica tus clientes con MotorHub Admin. Conecta tu negocio
+                con conductores que necesitan tus servicios y administra tu
+                presencia dentro del ecosistema vehicular.
+              </p>
+
+              <a
+                href="#"
+                class="mt-8 inline-flex items-center gap-2 rounded-xl bg-[#007AFF] px-5 py-3.5 text-sm font-bold shadow-glowBlue transition hover:-translate-y-0.5 hover:bg-[#1688ff]"
+              >
+                Registrar mi Negocio
+
+                <!-- ICON: flecha -->
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14"></path>
+                  <path d="m13 6 6 6-6 6"></path>
+                </svg>
+              </a>
+
+            </div>
+
+
+            <!-- Admin visual -->
+            <div class="relative min-h-[350px] overflow-hidden bg-[#0D1117] p-6 sm:p-10">
+
+              <div class="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[#007AFF]/10 blur-3xl"></div>
+
+              <div class="relative mx-auto max-w-md rounded-2xl border border-white/10 bg-[#161B22] p-4 shadow-2xl">
+
+                <!-- Dashboard header -->
+                <div class="flex items-center justify-between border-b border-white/5 pb-4">
+                  <div>
+                    <div class="font-montserrat text-xs font-bold">
+                      MotorHub Admin
+                    </div>
+                    <div class="mt-1 text-[8px] text-[#8B949E]">
+                      Panel de negocio
+                    </div>
+                  </div>
+
+                  <div class="h-7 w-7 rounded-lg bg-[#007AFF]/10"></div>
+                </div>
+
+                <!-- Stats -->
+                <div class="mt-4 grid grid-cols-3 gap-2">
+                  <div class="rounded-xl bg-[#0D1117] p-3">
+                    <div class="text-[8px] text-[#8B949E]">Contactos</div>
+                    <div class="mt-1 font-montserrat text-sm font-bold">83</div>
+                  </div>
+
+                  <div class="rounded-xl bg-[#0D1117] p-3">
+                    <div class="text-[8px] text-[#8B949E]">Solicitudes</div>
+                    <div class="mt-1 font-montserrat text-sm font-bold">46</div>
+                  </div>
+
+                  <div class="rounded-xl bg-[#0D1117] p-3">
+                    <div class="text-[8px] text-[#8B949E]">Clientes</div>
+                    <div class="mt-1 font-montserrat text-sm font-bold">30</div>
+                  </div>
+                </div>
+
+                <!-- Chart -->
+                <div class="mt-3 rounded-xl bg-[#0D1117] p-4">
+                  <div class="flex items-center justify-between">
+                    <span class="text-[8px] text-[#8B949E]">Solicitudes esta semana</span>
+                    <span class="text-[8px] text-[#00C7BE]">+18.4%</span>
+                  </div>
+
+                  <div class="mt-5 flex h-24 items-end gap-2">
+                    <div class="h-[35%] flex-1 rounded-t bg-[#007AFF]/30"></div>
+                    <div class="h-[48%] flex-1 rounded-t bg-[#007AFF]/40"></div>
+                    <div class="h-[43%] flex-1 rounded-t bg-[#007AFF]/40"></div>
+                    <div class="h-[64%] flex-1 rounded-t bg-[#007AFF]/60"></div>
+                    <div class="h-[55%] flex-1 rounded-t bg-[#007AFF]/60"></div>
+                    <div class="h-[78%] flex-1 rounded-t bg-[#007AFF]"></div>
+                    <div class="h-[91%] flex-1 rounded-t bg-[#00C7BE]"></div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- =========================================================
+         FINAL CTA
+    ========================================================== -->
+    <section class="relative overflow-hidden py-20 sm:py-28">
+
+      <div class="absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#007AFF]/5 blur-3xl"></div>
+
+      <div class="relative mx-auto max-w-4xl px-5 text-center sm:px-8">
+
+        <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[#007AFF]/10">
+          <!-- ICON: volante -->
+          <svg class="h-7 w-7 text-[#007AFF]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="8.5"></circle>
+            <path d="M5 10.5h14"></path>
+            <path d="M12 10.5v9"></path>
+            <circle cx="12" cy="10.5" r="2"></circle>
+          </svg>
+        </div>
+
+        <h2 class="mt-6 font-montserrat text-3xl font-extrabold sm:text-5xl">
+          Tu próximo viaje empieza
+          <span class="text-[#007AFF]">más preparado.</span>
+        </h2>
+
+        <p class="mx-auto mt-5 max-w-2xl text-sm leading-7 text-[#8B949E] sm:text-base">
+          Lleva contigo un ecosistema pensado para tu vehículo,
+          tus viajes y las situaciones que pueden surgir en el camino.
+        </p>
+
+        <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+
+          <a
+            href="#"
+            class="rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-[#0D1117] transition hover:bg-gray-100"
+          >
+            Descargar MotorHub
+          </a>
+
+          <a
+            href="#b2b"
+            class="rounded-xl border border-white/10 bg-[#161B22] px-6 py-3.5 text-sm font-bold text-white transition hover:border-[#007AFF]/40 hover:bg-[#1b222b]"
+          >
+            Soy un negocio
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- =========================================================
+       FOOTER
+  ========================================================== -->
+  <footer class="border-t border-white/5 bg-[#080B0F]">
+
+    <div class="mx-auto max-w-7xl px-5 py-10 sm:px-8">
+
+      <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+
+        <!-- Brand -->
+        <div class="lg:col-span-2">
+          <a href="#inicio" class="flex items-center gap-2.5">
+            <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-[#007AFF]">
+              <!-- ICON: logo -->
+              <svg
+                class="h-5 w-5 text-white"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="8.5"></circle>
+                <path d="M5 10.5h14"></path>
+                <path d="M12 10.5v9"></path>
+                <circle cx="12" cy="10.5" r="2"></circle>
+              </svg>
+            </div>
+
+            <span class="font-montserrat text-lg font-extrabold">
+              Motor<span class="text-[#007AFF]">Hub</span>
+            </span>
+          </a>
+
+          <p class="mt-4 max-w-md text-sm leading-6 text-[#8B949E]">
+            El ecosistema vehicular que conecta conductores y servicios
+            automotrices. Comenzamos en Santa Cruz, Bolivia.
+          </p>
+        </div>
+
+
+        <!-- Navigation -->
+        <div>
+          <h3 class="font-montserrat text-xs font-bold uppercase tracking-wider text-white">
+            MotorHub
+          </h3>
+
+          <div class="mt-4 space-y-3 text-sm text-[#8B949E]">
+            <a href="#funciones" class="block transition hover:text-white">Funciones</a>
+            <a href="#emergencia" class="block transition hover:text-white">Emergencias</a>
+            <a href="#aliados" class="block transition hover:text-white">Aliados</a>
+            <a href="#b2b" class="block transition hover:text-white">Para negocios</a>
+          </div>
+        </div>
+
+
+        <!-- Legal -->
+        <div>
+          <h3 class="font-montserrat text-xs font-bold uppercase tracking-wider text-white">
+            Legal
+          </h3>
+
+          <div class="mt-4 space-y-3 text-sm text-[#8B949E]">
+                      <a href="index-web.html" class="block transition hover:text-white">Segunda version</a>
+            <a href="#" class="block transition hover:text-white">Términos y condiciones</a>
+            <a href="#" class="block transition hover:text-white">Política de privacidad</a>
+            <a href="#" class="block transition hover:text-white">Contacto</a>
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- Bottom -->
+      <div class="mt-10 flex flex-col gap-5 border-t border-white/5 pt-7 sm:flex-row sm:items-center sm:justify-between">
+
+        <p class="text-xs text-[#8B949E]">
+          © 2026 MotorHub. Todos los derechos reservados.
+        </p>
+
+        <!-- Mini store buttons -->
+        <div class="flex gap-2">
+
+          <a
+            href="#"
+            aria-label="Descargar en App Store"
+            class="flex h-9 items-center gap-2 rounded-lg border border-white/10 bg-[#161B22] px-3 text-white transition hover:bg-[#1c222b]"
+          >
+            <!-- ICON: Apple -->
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.05 20.28c-.98.95-2.05.8-3.09.35-1.1-.46-2.11-.48-3.27 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.81 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.32 2.99-2.53 4.07zM12.03 7.25C11.88 5.02 13.69 3.18 15.78 3c.29 2.58-2.33 4.5-3.75 4.25z"/>
+            </svg>
+            <span class="text-[10px] font-semibold">App Store</span>
+          </a>
+
+          <a
+            href="#"
+            aria-label="Descargar en Google Play"
+            class="flex h-9 items-center gap-2 rounded-lg border border-white/10 bg-[#161B22] px-3 text-white transition hover:bg-[#1c222b]"
+          >
+            <!-- ICON: Google Play -->
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none">
+              <path d="M3.5 3.5L14.2 12 3.5 20.5V3.5Z" fill="#00C7BE"/>
+              <path d="M3.5 3.5L17.8 10.7L14.2 12L3.5 3.5Z" fill="#4CC9F0"/>
+              <path d="M3.5 20.5L17.8 13.3L14.2 12L3.5 20.5Z" fill="#00AEEF"/>
+              <path d="M17.8 10.7L20.5 12L17.8 13.3L14.2 12L17.8 10.7Z" fill="#FF3B30"/>
+            </svg>
+            <span class="text-[10px] font-semibold">Google Play</span>
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- =========================================================
+       OPTIONAL MOBILE MENU SCRIPT
+       El botón del menú puede conectarse aquí a un menú móvil real.
+  ========================================================== -->
+  <script>
+    const mobileMenuButton = document.querySelector(
+      'header button[aria-label="Abrir menú"]'
+    );
+
+    mobileMenuButton?.addEventListener("click", () => {
+      // Placeholder:
+      // Aquí puedes implementar un drawer/dropdown de navegación móvil.
+      console.log("Mobile menu");
+    });
+  </script>
+
+</body>
+</html>
